@@ -4,7 +4,6 @@ class PostsCounter extends Component {
   
   render() {
     let { count } = this.props;
-    console.log(count);
     return (
       <div>Number of posts: { count } </div>
     );
