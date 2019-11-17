@@ -6,7 +6,7 @@ import Posts from './components/pages/Posts/PostsPage';
 import Contact from './components/pages/Contact/ContactPage';
 import NotFound from './components/pages/NotFound/NotFoundPage';
 import NewPost from './components/pages/NewPost/NewPost';
-import SinglePost from './components/pages/SinglePost/SinglePost';
+import SinglePostPage from './components/pages/SinglePost/SinglePostPage';
 
 class App extends Component {
 
@@ -18,7 +18,7 @@ class App extends Component {
           <Route exact path="/posts" component={Posts} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path='/posts/new' component={NewPost} />
-          <Route exact path='/posts/:id' component={SinglePost} />
+          <Route exact path='/posts/:id' component={SinglePostPage} />
           <Route component={NotFound} />
         </Switch>
       </MainLayout>

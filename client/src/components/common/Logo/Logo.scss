@@ -1,6 +1,7 @@
 @import '../../../styles/settings.scss';
 
 .logo {
+  display: inline-block;
   font-weight: bold;
   font-size: $base-size * 2;
   color: $color-text;

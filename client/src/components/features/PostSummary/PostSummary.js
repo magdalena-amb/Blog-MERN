@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import './PostSummary.scss';
 import HtmlBox from '../../common/HtmlBox/HtmlBox';
@@ -11,9 +12,10 @@ const PostSummary = ({ id, title, content }) => (
   <article className='post-summary'>
     <SmallTitle>{title}</SmallTitle>
     <HtmlBox>{cutText( content, 120 )}</HtmlBox>
-    <Button variant="primary">
-      Read more
-    </Button>
+
+    <Link to={`/posts/${id}`} >
+      <Button variant='primary'>Read more</Button>
+    </Link> 
   </article>
 );
 
