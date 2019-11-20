@@ -3,7 +3,6 @@ import { PropTypes } from 'prop-types';
 import PostsList from '../PostsList/PostsList';
 import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
-//import { request } from 'http';
 
 class Posts extends Component {
 
@@ -34,6 +33,7 @@ Posts.propTypes = {
         id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         content: PropTypes.string.isRequired,
+        author: PropTypes.string.isRequired,
       })
     ),
     loadPosts: PropTypes.func.isRequired,

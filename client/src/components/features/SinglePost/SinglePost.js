@@ -27,6 +27,7 @@ class SinglePost extends Component {
             <div>
                 <PageTitle>{ singlePost.title }</PageTitle>
                 <HtmlBox>{ singlePost.content }</HtmlBox>
+                <p>Author: {singlePost.author} </p>
             </div> 
         )}
         { (request.pending === false && request.error !== null) && <Alert variant = 'error'>{ request.error }</Alert>} 
@@ -39,7 +40,12 @@ class SinglePost extends Component {
 
 SinglePost.propTypes = {
     getPost: PropTypes.func.isRequired,
-    singlePost: PropTypes.object,
+    singlePost: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+    })
   };
  
 
