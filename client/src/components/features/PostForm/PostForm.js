@@ -45,7 +45,7 @@ class PostForm extends React.Component {
     
     e.preventDefault();
     addPost(post);
-    this.setState({ ...this.state, sent: true });
+    this.setState({ post: {title: '', author: '', content: ''}, sent: true });
   }
 
    updatePost = (e) => {
@@ -76,13 +76,13 @@ class PostForm extends React.Component {
   
     if (singlePost.id ) {
       if(request.error) return <Alert variant="error">{request.error}</Alert>
-      if(request.success && sent === true ) return <Alert variant="success">Post has been added!</Alert>
+      if(request.success && sent === true ) return <Alert variant="success">Post has been updated!</Alert>
       if(request.pending) return <Spinner />
       else return  (
         <form onSubmit={updatePost}>
           <TextField
             label="Title"
-            value={singlePost.title}
+            value={singlePost.title} 
             name="title"
             onChange={handleChange}
           />

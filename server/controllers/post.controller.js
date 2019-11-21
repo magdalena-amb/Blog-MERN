@@ -44,10 +44,8 @@ exports.editPost = async (req, res) => {
         {content: req.body.content}
         );
     
-      postUpdated = await editedPost.save();
-      res.status(200).json(postUpdated);
+      res.status(200).json(editedPost);
     
-
   } catch(err) {
     res.status(500).json(err);
   }
