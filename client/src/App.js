@@ -18,6 +18,7 @@ class App extends Component {
           <Route exact path="/posts" component={Posts} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path='/posts/new' component={NewPost} />
+          <Route exact path='/posts/edit/:id' component={NewPost} />
           <Route exact path='/posts/:id' component={SinglePostPage} />
           <Route component={NotFound} />
         </Switch>

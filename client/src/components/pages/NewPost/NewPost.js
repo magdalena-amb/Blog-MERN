@@ -1,9 +1,11 @@
 import React from 'react';
+import PostForm from '../../features/PostForm/PostForm';
 
-const NewPost = () => (
-    <div>
-        <h1>New Post</h1>
-    </div>
-);
+const NewPost = ({match}) =>{
+    //console.log(match.params.id);
+    return(
+        < PostForm post_id ={ match.params.id} />
+    );   
+};
 
 export default NewPost;

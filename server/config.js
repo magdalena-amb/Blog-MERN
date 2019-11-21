@@ -1,4 +1,4 @@
 module.exports = {
-    PORT: 8000,
-    DB: 'mongodb://localhost:27017/mernapp',
+    PORT: process.env.PORT || 8000,
+    DB: process.env.MONGO_URI || 'mongodb://localhost/mernapp',
   };

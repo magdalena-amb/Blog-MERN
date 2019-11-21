@@ -1,5 +1,6 @@
 const express = require ('express');
 const cors = require ('cors');
+const bodyParser = require('body-parser');
 const config = require('./config');
 const mongoose = require('mongoose');
 const app = express();
@@ -29,6 +30,7 @@ const postRoutes = require('./routes/post.routes');
 
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(helmet());
 app.use('/api', postRoutes);

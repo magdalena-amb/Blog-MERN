@@ -17,12 +17,14 @@ export const LOAD_POSTS = createActionName('LOAD_POSTS');
 export const START_REQUEST = createActionName('START_REQUEST');
 export const END_REQUEST = createActionName('END_REQUEST');
 export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
+export const CLEAR_STATE = createActionName('CLEAR_STATE');
 export const GET_POST = createActionName('GET_POST');
 
 export const getPost = payload => ({payload, type: GET_POST});
 export const loadPosts = payload => ({ payload, type: LOAD_POSTS });
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
+export const clearState = () => ({ type: CLEAR_STATE });
 export const errorRequest = error => ({ error, type: ERROR_REQUEST });
 
 /* THUNKS */
@@ -55,6 +57,43 @@ export const getPostRequest = (post_id) => {
     }
 }
 
+export const updatePostRequest = (post_id, post) => {
+    console.log( post );
+
+    return async dispatch => {
+        
+        dispatch(startRequest());
+        try {
+
+            let res = await axios.put(`${API_URL}/posts/edit/${post_id}`, post);
+            await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+            dispatch(endRequest());
+
+        } catch (err) {
+            dispatch(errorRequest(err.message));
+        }  
+    }
+}
+
+
+
+export const addPostRequest = (post) => { 
+
+    return async dispatch => {
+
+      dispatch(startRequest());
+      try {
+  
+        let res = await axios.post(`${API_URL}/posts`, post);
+        await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+        dispatch(endRequest());
+  
+      } catch(err) {
+        dispatch(errorRequest(err.message));
+      }
+    };
+  };
+
 
 /* INITIAL STATE */
 
@@ -82,7 +121,17 @@ export default function reducer(statePart = initialState, action = {}) {
         return { ...statePart, request: { pending: false, error: action.error, success: false } };
     case GET_POST: 
         return { ...statePart, singlePost: action.payload };   
-        default:
-      return statePart;
+    case CLEAR_STATE:
+        return { ...statePart,
+             data: [],
+            request: {
+                pending: false,
+                error: null,
+                success: null,
+            },
+            sent: false,
+            singlePost : {} };
+    default:
+        return statePart;
   }
 };
