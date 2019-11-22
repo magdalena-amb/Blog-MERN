@@ -17,21 +17,32 @@ import Alert from '../../common/Alert/Alert';
 import Spinner from '../../common/Spinner/Spinner';
 
 class PostForm extends React.Component {
-  
-  state = {
-    post: {
-      title: '',
-      author: '',
-      content: '',
-    },
-    sent: false,
-  }
 
-  componentDidMount(){
+    state = {
+        post: {
+          title: '' ,
+          author: '',
+          content:  '',
+        },
+        sent: false,
+    }
+   
+  
+  async componentDidMount(){
 
     const { getPost, post_id } = this.props;
     if (post_id) {
-      getPost(post_id);
+      await getPost(post_id);
+      let singlePost = this.props.singlePost;
+      this.setState({
+        ...this.state,
+        post: {
+          title: singlePost.title,
+          author: singlePost.author,
+          content: singlePost.content,
+        }
+      });
+
     }   
   }
   componentWillUnmount(){
@@ -82,14 +93,14 @@ class PostForm extends React.Component {
         <form onSubmit={updatePost}>
           <TextField
             label="Title"
-            value={singlePost.title} 
+            value={post.title} 
             name="title"
             onChange={handleChange}
           />
 
           <TextField
             label="Author"
-            value={singlePost.author}
+            value={post.author}
             name="author"
             onChange={handleChange}
           />
@@ -97,7 +108,7 @@ class PostForm extends React.Component {
           <SectionTitle>Edit post content</SectionTitle>
           <Editor
               className="content-editor"
-              text={singlePost.content}
+              text={post.content}
               options={{ placeholder: false, toolbar: { buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3'] } }}
               onChange={handleEditor}
             />
