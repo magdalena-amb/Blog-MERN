@@ -37,7 +37,6 @@ export const loadPostsRequest = () => {
         dispatch(startRequest());
         try {
             let res = await axios.get(`${API_URL}/posts`);
-            await new Promise((resolve, reject) => setTimeout(resolve, 2000));
             dispatch(loadPosts(res.data));
             dispatch(endRequest());
         } catch (err) {
@@ -51,7 +50,6 @@ export const getPostRequest = (post_id) => {
         dispatch(startRequest());
         try {
             let res = await axios.get(`${API_URL}/posts/${post_id}`);
-            await new Promise((resolve, reject) => setTimeout(resolve, 2000));
             dispatch(getPost(res.data));
             dispatch(endRequest());
         } catch (err) {
@@ -66,12 +64,7 @@ export const getRandomPostRequest = () => {
         try {
             let res = await axios.get(`${API_URL}/posts/random`);
 
-            console.log(res.data);
-
-            await new Promise((resolve, reject) => setTimeout(resolve, 2000));
-
             dispatch(getPost(res.data));
-
             dispatch(endRequest());
 
         } catch (err) {
@@ -88,7 +81,6 @@ export const updatePostRequest = (post_id, post) => {
         try {
 
             let res = await axios.put(`${API_URL}/posts/edit/${post_id}`, post);
-            await new Promise((resolve, reject) => setTimeout(resolve, 2000));
             dispatch(endRequest());
 
         } catch (err) {
@@ -105,7 +97,6 @@ export const addPostRequest = (post) => {
       try {
   
         let res = await axios.post(`${API_URL}/posts`, post);
-        await new Promise((resolve, reject) => setTimeout(resolve, 2000));
         dispatch(endRequest());
   
       } catch(err) {
@@ -120,14 +111,11 @@ export const loadPostsByPageRequest = (page, postsPerPage) => {
   
       dispatch(startRequest());
       try {
-  
-        //const postsPerPage = 5; 
-  
+
         const startAt = (page - 1) * postsPerPage;
         const limit = postsPerPage;
   
         let res = await axios.get(`${API_URL}/posts/range/${startAt}/${limit}`);
-        await new Promise((resolve, reject) => setTimeout(resolve, 2000));
   
         const payload = {
           posts: res.data.posts,
@@ -137,7 +125,6 @@ export const loadPostsByPageRequest = (page, postsPerPage) => {
         };
   
         dispatch(loadPostsByPage(payload));
-
         dispatch(endRequest());
 
       } catch(e) {

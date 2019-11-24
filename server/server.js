@@ -5,6 +5,7 @@ const config = require('./config');
 const mongoose = require('mongoose');
 const app = express();
 const helmet = require('helmet');
+const path = require('path');
 const sanitize = require('mongo-sanitize');
 
 //for testing only
@@ -36,11 +37,19 @@ app.use(express.json());
 app.use(helmet());
 app.use('/api', postRoutes);
 
-app.post('/', (req, res) => {
-    const cleaned = req.sanitize(req.body);
-    res.send(cleaned);
-});
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '/../client/build')));
 
+// sanitize
+// app.use(sanitize());
+// app.post('*', (req, res) => {
+//     const cleaned = req.sanitize(req.body);
+//     res.send(cleaned);
+// });
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../client/build/index.html'));
+  });
 
 app.listen(config.PORT, () => {
     console.log('Server is running on port:', config.PORT );

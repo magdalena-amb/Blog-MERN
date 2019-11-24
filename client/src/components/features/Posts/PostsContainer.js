@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import React, { Component } from 'react';
+import React from 'react';
 import { getPosts, loadPostsByPageRequest, getRequest, getPages } from '../../../redux/postsRedux';
 import Posts from  './Posts';
 

@@ -4,10 +4,15 @@ import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
 import HtmlBox from '../../common/HtmlBox/HtmlBox';
 import PageTitle from '../../common/PageTitle/PageTitle';
+import { FaFacebookF } from 'react-icons/fa';
 import './SinglePost.scss';
+
+import { FacebookProvider, Comments, ShareButton } from 'react-facebook';
+import { withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { getSinglePost, getRequest, getPostRequest } from '../../../redux/postsRedux';
+import { BASE_URL } from '../../../config';
 
 
 class SinglePost extends Component {
@@ -26,8 +31,18 @@ class SinglePost extends Component {
         { request.success  && (
             <div>
                 <PageTitle>{ singlePost.title }</PageTitle>
-                <HtmlBox>{ singlePost.content }</HtmlBox>
                 <p>Author: {singlePost.author} </p>
+                <HtmlBox>{ singlePost.content }</HtmlBox>
+        
+                <FacebookProvider appId="1464353420407801">
+                <ShareButton className='btnFacebook' href={BASE_URL}>
+                  <FaFacebookF/>
+                  Share
+                </ShareButton>
+                
+                  <Comments href={BASE_URL} />
+                </FacebookProvider>
+                
             </div> 
         )}
         { (request.pending === false && request.error !== null) && <Alert variant = 'error'>{ request.error }</Alert>} 
@@ -57,4 +72,6 @@ const mapDispatchToProps = (dispatch ) => ({
   getPost: (post_id ) => dispatch(getPostRequest(post_id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps )(SinglePost);
+//export default withRouter(props => <SinglePost {...props}/>);
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps )((props => <SinglePost {...props}/>)));
