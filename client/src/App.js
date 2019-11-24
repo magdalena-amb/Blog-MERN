@@ -7,6 +7,7 @@ import Contact from './components/pages/Contact/ContactPage';
 import NotFound from './components/pages/NotFound/NotFoundPage';
 import NewPost from './components/pages/NewPost/NewPost';
 import SinglePostPage from './components/pages/SinglePost/SinglePostPage';
+import RandomPostPage from './components/pages/RandomPost/RandomPostPage';
 
 class App extends Component {
 
@@ -20,6 +21,7 @@ class App extends Component {
           <Route exact path='/posts/new' component={NewPost} />
           <Route exact path='/posts/edit/:id' component={NewPost} />
           <Route exact path='/posts/:id' component={SinglePostPage} />
+          <Route exact path='/posts/random' component={RandomPostPage} />
           <Route component={NotFound} />
         </Switch>
       </MainLayout>

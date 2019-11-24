@@ -60,6 +60,26 @@ export const getPostRequest = (post_id) => {
     }
 }
 
+export const getRandomPostRequest = () => {
+    return async dispatch => {
+        dispatch(startRequest());
+        try {
+            let res = await axios.get(`${API_URL}/posts/random`);
+
+            console.log(res.data);
+
+            await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+
+            dispatch(getPost(res.data));
+
+            dispatch(endRequest());
+
+        } catch (err) {
+            dispatch(errorRequest(err.message));
+        }  
+    }
+}
+
 export const updatePostRequest = (post_id, post) => {
 
     return async dispatch => {

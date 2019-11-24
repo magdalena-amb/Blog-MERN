@@ -5,6 +5,7 @@ const config = require('./config');
 const mongoose = require('mongoose');
 const app = express();
 const helmet = require('helmet');
+const sanitize = require('mongo-sanitize');
 
 //for testing only
 const loadTestData = require('./testData');
@@ -34,6 +35,11 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(helmet());
 app.use('/api', postRoutes);
+
+app.post('/', (req, res) => {
+    const cleaned = req.sanitize(req.body);
+    res.send(cleaned);
+});
 
 
 app.listen(config.PORT, () => {

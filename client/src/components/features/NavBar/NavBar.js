@@ -11,6 +11,7 @@ class NavBar extends Component {
           { path: '/posts/new', title: 'Add post' },
           { path: '/posts', title: 'Posts' },
           { path: '/contact', title: 'Contact' },
+          { path: '/posts/random', title: 'Random ' },
         ],
       }
 

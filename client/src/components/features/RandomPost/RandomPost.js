@@ -4,24 +4,18 @@ import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
 import HtmlBox from '../../common/HtmlBox/HtmlBox';
 import PageTitle from '../../common/PageTitle/PageTitle';
-import './SinglePost.scss';
 
 import { connect } from 'react-redux';
-import { getSinglePost, getRequest, getPostRequest } from '../../../redux/postsRedux';
+import { getSinglePost, getRequest, getRandomPostRequest } from '../../../redux/postsRedux';
 
 
-class SinglePost extends Component {
-    
-    componentDidMount() {
-        const { getPost, post_id } = this.props;
-        getPost(post_id);
-      }   
+class RandomPost extends Component {
 
   render() {
         const { singlePost, request } = this.props;
         
     return (
-      <div className="single-post"> 
+      <div className="random-post"> 
         { (request.pending || request.success === null) && < Spinner />}
         { request.success  && (
             <div>
@@ -38,8 +32,7 @@ class SinglePost extends Component {
 
 };
 
-SinglePost.propTypes = {
-    getPost: PropTypes.func.isRequired,
+RandomPost.propTypes = {
     singlePost: PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
@@ -47,6 +40,7 @@ SinglePost.propTypes = {
       author: PropTypes.string.isRequired,
     })
   };
+ 
 
 const mapStateToProps = state => ({
   singlePost: getSinglePost(state),
@@ -54,7 +48,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch ) => ({
-  getPost: (post_id ) => dispatch(getPostRequest(post_id)),
+  getRandomPost: () => dispatch(getRandomPostRequest()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps )(SinglePost);
+export default connect(mapStateToProps, mapDispatchToProps )(RandomPost);
